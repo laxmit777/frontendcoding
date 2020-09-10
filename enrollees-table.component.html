@@ -1,0 +1,27 @@
+<div class="full-width u-margin-top-small" style="overflow: auto; max-height: calc(100% - 110px);white-space: nowrap;">
+    <table class="table table-bordered table-striped table-hover u-margin-top-medium full-width">
+        <thead>
+            <tr>
+                <th *ngFor="let header of headers">{{ header?.displayName }}</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of tableData">
+                <td *ngFor="let header of headers" [ngSwitch]="header?.field">
+                    <span *ngSwitchCase="'name'">
+                        <input type="text" name="name" [(ngModel)]="row[header?.field]" />
+                    </span>
+                    <span *ngSwitchCase="'active'">
+                        <input type="checkbox" [(ngModel)]="row[header?.field]" [checked]="row[header?.field]"
+                            name="is_active" />
+                    </span>
+                    <span *ngSwitchDefault>{{ row[header?.field]}}</span>
+                </td>
+                <td>
+                    <button class="btn btn-primary" (click)="updateEnrollee(row)">Update</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
